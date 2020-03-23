@@ -10,7 +10,6 @@ class BusRoute extends Component {
 
     getBusRoutes() {
         console.log('In Bus routes!');
-
         try {
             fetchData('Routes').then((result) => {
                 console.log('RESULTS: ', result);
