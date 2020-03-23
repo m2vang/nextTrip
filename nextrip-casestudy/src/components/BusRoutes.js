@@ -5,7 +5,7 @@ import fetchData from '../Fetch';
 
 class BusRoute extends Component {
     componentDidMount() {
-        // this.getBusRoutes();
+        this.getBusRoutes();
     }
 
     getBusRoutes() {
@@ -23,7 +23,7 @@ class BusRoute extends Component {
     click = () => {
         console.log('in click');
         this.props.storeBusRoute(9);
-    }
+    };
 
     render() {
         return (
