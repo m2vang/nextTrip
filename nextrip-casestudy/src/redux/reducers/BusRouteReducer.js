@@ -7,7 +7,7 @@ const INIT_STATE = {
 export default (state = INIT_STATE, action) => {
     switch (action.type) {
         case STORE_BUS_ROUTE:
-            return { ...state, busRoute: action.payload };
+            return { ...state, busRoute: action.route };
         case CLEAR_BUS_ROUTE:
             return { ...state, busRoute: '' };
         default:
