@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
-import ProcessStepper from './components/routeStepper/ProcessStepper';
+import CustomizedSteppers from './components/routeStepper/ProcessStepper';
 import BusRoutes from './components/BusRoutes';
 // material-ui
 import Typography from "@material-ui/core/Typography";
@@ -16,8 +16,8 @@ let theme = createMuiTheme();
 theme = responsiveFontSizes(theme);
 
 class App extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             inRoute: false,
             inStop: false,
@@ -27,13 +27,15 @@ class App extends Component {
     }
 
     handleRouteSelection = () => {
-        console.log('in handleRouteSelection');
         this.setState({inRoute: true, inStop: false, chosen: true, boxAlignment: ''});
     };
 
     handleStopSelection = () => {
-        console.log('in handleStopSelection');
         this.setState({inRoute: false, inStop: true, chosen: true, boxAlignment: ''});
+    };
+
+    handleRestart = () => {
+        this.setState({inRoute: false, inStop: false, chosen: false, boxAlignment: 'inline-flex'});
     };
 
     getbtnContainerStyling = () => {
@@ -63,7 +65,7 @@ class App extends Component {
                                     By Stop Number
                                 </Button>
                             </Box>
-                            {this.state.inRoute ? <ProcessStepper/> : <div/>}
+                            {this.state.inRoute ? <CustomizedSteppers restart={this.handleRestart}/> : <div/>}
                             <BusRoutes/>
                         </Grid>
                     </ThemeProvider>

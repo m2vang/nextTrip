@@ -34,7 +34,7 @@ function stepIcons(props) {
 	);
 }
 
-export default function CustomizedSteppers() {
+const CustomizedSteppers = ({restart}) => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = React.useState(0);
 	const {steps} = useSelector(state => ({steps: state.bRoute.steps}));
@@ -49,11 +49,12 @@ export default function CustomizedSteppers() {
 
 	const handleReset = () => {
 		setActiveStep(0);
+		restart();
 	};
 
 	return (
 		<div className={classes.root}>
-			<Stepper alternativeLabel activeStep={activeStep} connector={<StepConnectorStyles />}>
+			<Stepper alternativeLabel activeStep={activeStep} connector={<StepConnectorStyles/>}>
 				{steps.map(label => (
 					<Step key={label}>
 						<StepLabel StepIconComponent={stepIcons}>{label}</StepLabel>
@@ -68,7 +69,7 @@ export default function CustomizedSteppers() {
 						</Typography>
 						<Button variant="contained" color="primary" onClick={handleReset} className={classes.button}>
 							Restart
-							<RefreshIcon />
+							<RefreshIcon/>
 						</Button>
 					</div>
 				) : (
@@ -76,7 +77,7 @@ export default function CustomizedSteppers() {
 						<div>
 							{activeStep === 0 ? null :
 								<Button variant="contained" onClick={handleBack} className={classes.button}>
-									<ArrowBackIosIcon />
+									<ArrowBackIosIcon/>
 									Back
 								</Button>}
 							<Button
@@ -85,7 +86,7 @@ export default function CustomizedSteppers() {
 								onClick={handleNext}
 								className={classes.button}>
 								{activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-								<ArrowForwardIosIcon />
+								<ArrowForwardIosIcon/>
 							</Button>
 						</div>
 					</div>
@@ -93,7 +94,9 @@ export default function CustomizedSteppers() {
 			</div>
 		</div>
 	);
-}
+};
+
+export default CustomizedSteppers;
 
 const StepConnectorStyles = withStyles({
 	alternativeLabel: {
