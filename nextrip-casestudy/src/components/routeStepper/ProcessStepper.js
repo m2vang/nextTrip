@@ -18,67 +18,6 @@ import DirectionsBusIcon from '@material-ui/icons/DirectionsBus';
 import DirectionsIcon from '@material-ui/icons/Directions';
 import PanToolIcon from '@material-ui/icons/PanTool';
 
-const StepConnectorStyles = withStyles({
-	alternativeLabel: {
-		top: 22,
-	},
-	active: {
-		'& $line': {
-			backgroundImage:
-				'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
-		},
-	},
-	completed: {
-		'& $line': {
-			backgroundImage:
-				'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
-		},
-	},
-	line: {
-		height: 3,
-		border: 0,
-		backgroundColor: '#eaeaf0',
-		borderRadius: 1,
-	},
-})(StepConnector);
-
-const StepIconStyles = makeStyles({
-	root: {
-		backgroundColor: '#ccc',
-		zIndex: 1,
-		color: '#fff',
-		width: 50,
-		height: 50,
-		display: 'flex',
-		borderRadius: '50%',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	active: {
-		backgroundImage:
-			'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(205,34,39) 50%, rgb(63,81,181) 100%)',
-		boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
-	},
-	completed: {
-		backgroundImage:
-			'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
-	},
-});
-
-const useStyles = makeStyles(theme => ({
-	root: {
-		width: '100%',
-	},
-	button: {
-		fontWeight: 'bolder',
-		marginRight: theme.spacing(1),
-	},
-	instructions: {
-		marginTop: theme.spacing(1),
-		marginBottom: theme.spacing(1),
-	},
-}));
-
 function stepIcons(props) {
 	const classes = StepIconStyles();
 	const { active, completed } = props;
@@ -155,6 +94,67 @@ export default function CustomizedSteppers() {
 		</div>
 	);
 }
+
+const StepConnectorStyles = withStyles({
+	alternativeLabel: {
+		top: 22,
+	},
+	active: {
+		'& $line': {
+			backgroundImage:
+				'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+		},
+	},
+	completed: {
+		'& $line': {
+			backgroundImage:
+				'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+		},
+	},
+	line: {
+		height: 3,
+		border: 0,
+		backgroundColor: '#eaeaf0',
+		borderRadius: 1,
+	},
+})(StepConnector);
+
+const StepIconStyles = makeStyles({
+	root: {
+		backgroundColor: '#ccc',
+		zIndex: 1,
+		color: '#fff',
+		width: 50,
+		height: 50,
+		display: 'flex',
+		borderRadius: '50%',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	active: {
+		backgroundImage:
+			'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(205,34,39) 50%, rgb(63,81,181) 100%)',
+		boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+	},
+	completed: {
+		backgroundImage:
+			'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+	},
+});
+
+const useStyles = makeStyles(theme => ({
+	root: {
+		width: '100%',
+	},
+	button: {
+		fontWeight: 'bolder',
+		marginRight: theme.spacing(1),
+	},
+	instructions: {
+		marginTop: theme.spacing(1),
+		marginBottom: theme.spacing(1),
+	},
+}));
 
 stepIcons.propTypes = {
 	active: PropTypes.bool,
