@@ -1,11 +1,12 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
+import Header from './components/Header';
 import BusRoutes from './components/BusRoutes';
 
 function App() {
   return (
     <div className="App">
-      <h1>NextTrip</h1>
+      <Header/>
       <p>Minneapolis Metro Transit Bus Line</p>
       <BusRoutes/>
     </div>
