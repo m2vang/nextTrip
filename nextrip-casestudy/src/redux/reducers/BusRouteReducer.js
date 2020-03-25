@@ -1,8 +1,5 @@
 import { STORE_BUS_ROUTE, CLEAR_BUS_ROUTE } from '../actions/Types';
-
-const INIT_STATE = {
-    busRoute: ''
-};
+import { INIT_STATE } from '../InitialStates';
 
 export default (state = INIT_STATE, action) => {
     switch (action.type) {
