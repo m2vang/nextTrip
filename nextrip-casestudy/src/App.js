@@ -3,12 +3,13 @@ import './App.scss';
 import Header from './components/Header';
 import ProcessStepper from './components/ProcessStepper';
 import BusRoutes from './components/BusRoutes';
+import Typography from "@material-ui/core/Typography";
 
 function App() {
   return (
     <div className="App">
       <Header/>
-      <p>Minneapolis Metro Transit Bus Line</p>
+      <Typography>Minneapolis Metro Transit Bus Line</Typography>
         <ProcessStepper/>
       <BusRoutes/>
     </div>

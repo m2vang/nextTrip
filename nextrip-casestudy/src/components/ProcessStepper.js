@@ -1,24 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { useSelector } from 'react-redux'
 import clsx from 'clsx';
+// material-ui
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import SettingsIcon from '@material-ui/icons/Settings';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import VideoLabelIcon from '@material-ui/icons/VideoLabel';
 import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
-import { useSelector } from 'react-redux'
 import Typography from "@material-ui/core/Typography";
-//icons
+// material-ui icons
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import DirectionsBusIcon from '@material-ui/icons/DirectionsBus';
+import DirectionsIcon from '@material-ui/icons/Directions';
+import PanToolIcon from '@material-ui/icons/PanTool';
 
-
-const ColorlibConnector = withStyles({
+const StepConnectorStyles = withStyles({
 	alternativeLabel: {
 		top: 22,
 	},
@@ -42,7 +42,7 @@ const ColorlibConnector = withStyles({
 	},
 })(StepConnector);
 
-const useColorlibStepIconStyles = makeStyles({
+const StepIconStyles = makeStyles({
 	root: {
 		backgroundColor: '#ccc',
 		zIndex: 1,
@@ -65,34 +65,6 @@ const useColorlibStepIconStyles = makeStyles({
 	},
 });
 
-function ColorlibStepIcon(props) {
-	const classes = useColorlibStepIconStyles();
-	const { active, completed } = props;
-
-	const icons = {
-		1: <SettingsIcon />,
-		2: <GroupAddIcon />,
-		3: <VideoLabelIcon />,
-	};
-
-	return (
-		<div
-			className={clsx(classes.root, {
-				[classes.active]: active,
-				[classes.completed]: completed,
-			})}
-		>
-			{icons[String(props.icon)]}
-		</div>
-	);
-}
-
-ColorlibStepIcon.propTypes = {
-	active: PropTypes.bool,
-	completed: PropTypes.bool,
-	icon: PropTypes.node,
-};
-
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: '100%',
@@ -106,6 +78,22 @@ const useStyles = makeStyles(theme => ({
 		marginBottom: theme.spacing(1),
 	},
 }));
+
+function stepIcons(props) {
+	const classes = StepIconStyles();
+	const { active, completed } = props;
+	const icons = {
+		1: <DirectionsBusIcon />,
+		2: <DirectionsIcon />,
+		3: <PanToolIcon />,
+	};
+
+	return (
+		<div className={clsx(classes.root, {[classes.active]: active, [classes.completed]: completed })}>
+			{icons[String(props.icon)]}
+		</div>
+	);
+}
 
 export default function CustomizedSteppers() {
 	const classes = useStyles();
@@ -126,10 +114,10 @@ export default function CustomizedSteppers() {
 
 	return (
 		<div className={classes.root}>
-			<Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
+			<Stepper alternativeLabel activeStep={activeStep} connector={<StepConnectorStyles />}>
 				{steps.map(label => (
 					<Step key={label}>
-						<StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+						<StepLabel StepIconComponent={stepIcons}>{label}</StepLabel>
 					</Step>
 				))}
 			</Stepper>
@@ -167,3 +155,9 @@ export default function CustomizedSteppers() {
 		</div>
 	);
 }
+
+stepIcons.propTypes = {
+	active: PropTypes.bool,
+	completed: PropTypes.bool,
+	icon: PropTypes.node,
+};
