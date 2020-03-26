@@ -20,9 +20,9 @@ class BusRoute extends Component {
         }
     }
 
-    handleRouteSelection = () => {
-        console.log('in click');
-        // this.props.storeBusRoute(9);
+    handleRouteSelection = (routeChosen) => {
+        console.log('in click', routeChosen);
+        this.props.storeBusRoute(routeChosen);
     };
 
     render() {

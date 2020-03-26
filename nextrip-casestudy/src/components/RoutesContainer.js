@@ -33,7 +33,7 @@ class RoutesContainer extends Component {
 					<TableBody>
 						{this.props.routeData.map((route, index) => {
 							return (
-								<TableRow key={index} hover style={styles.tableRow} onClick={this.props.handleRouteSelection}>
+								<TableRow key={index} hover style={styles.tableRow} onClick={() => this.props.handleRouteSelection(route)}>
 									<TableCell style={styles.routeRow}>
 										{route.Route}
 									</TableCell>
@@ -66,7 +66,7 @@ class RoutesContainer extends Component {
 const styles = {
 	root: {
 		width: '45%',
-		marginLeft: '30%',
+		marginLeft: '28%',
 		border: '2px solid',
 		borderRadius: '5px',
 		marginBottom: '15px'
