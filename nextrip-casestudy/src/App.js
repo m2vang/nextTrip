@@ -52,15 +52,15 @@ class App extends Component {
                         <Grid item xs={12}>
                             <Header/>
                             <Typography variant="h4" style={styles.title}>Minneapolis Metro Transit Bus Line</Typography>
-                            <Typography variant="h5" style={styles.title}>Real Time Departures</Typography>
+                            <Typography variant="h5" style={styles.title}>Real Time Departures By: </Typography>
                             <Box style={this.getbtnContainerStyling()}>
-                                <Button variant="contained" color="primary" style={styles.button}
+                                <Button variant="contained" color={this.state.inRoute ? "primary" : "default"} style={styles.button}
                                         onClick={this.handleRouteSelection}>
-                                    By Route
+                                    Route
                                 </Button>
-                                <Button variant="contained" color="primary" style={styles.button}
+                                <Button variant="contained" color={this.state.inStop ? "primary" : "default"} style={styles.button}
                                         onClick={this.handleStopSelection}>
-                                    By Stop Number
+                                    Stop Number
                                 </Button>
                             </Box>
                             {this.state.inRoute ? <RouteProcessSteppers restart={this.handleRestart}/> : <div/>}
