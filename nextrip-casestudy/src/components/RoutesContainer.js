@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -19,17 +20,20 @@ class RoutesContainer extends Component {
 		if (this.props.routeTitles && this.props.routeData) {
 			content = (
 				<TableContainer style={styles.container}>
+					<Table stickyHeader>
 					<TableHead>
-						<TableRow>
+						<TableRow hover>
 							{this.props.routeTitles.map((item, index) => (
-								<TableCell key={index} style={styles.tableHead}>{item}</TableCell>
+								<TableCell key={index} style={styles.tableHead}>
+									{item}
+								</TableCell>
 							))}
 						</TableRow>
 					</TableHead>
 					<TableBody>
 						{this.props.routeData.map((route, index) => {
 							return (
-								<TableRow key={index}>
+								<TableRow key={index} hover>
 									<TableCell style={styles.routeRow}>
 										{route.Route}
 									</TableCell>
@@ -40,6 +44,7 @@ class RoutesContainer extends Component {
 							)
 						})}
 					</TableBody>
+					</Table>
 				</TableContainer>
 			)
 		} else {
@@ -63,14 +68,14 @@ const styles = {
 		width: '45%',
 		marginLeft: '30%',
 		border: '2px solid',
-		borderRadius: '10px',
+		borderRadius: '5px',
 		marginBottom: '15px'
 	},
 	rootMobile: {
-		width: '100%',
+		width: '99%',
 		marginLeft: '1%',
-		border: '2px solid',
-		borderRadius: '10px',
+		border: '1px solid',
+		borderRadius: '5px',
 		marginBottom: '15px'
 	},
 	container: {
@@ -80,8 +85,11 @@ const styles = {
 		fontWeight: 'bolder'
 	},
 	routeRow: {
-		paddingRight: '45px'
-	}
+		paddingRight: '45px',
+		hover: {
+			backgroundColor: '#f5f5f5',
+		}
+	},
 };
 const mapStateToProps = ({bRoute}) => {
 	const { routeData, routeTitles } = bRoute;

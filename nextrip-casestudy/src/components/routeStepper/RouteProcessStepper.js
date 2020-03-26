@@ -35,7 +35,7 @@ function stepIcons(props) {
 	);
 }
 
-const CustomizedSteppers = ({restart}) => {
+const RouteProcessSteppers = ({restart}) => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = React.useState(0);
 	const {steps} = useSelector(state => ({steps: state.bRoute.steps}));
@@ -98,7 +98,7 @@ const CustomizedSteppers = ({restart}) => {
 	);
 };
 
-export default CustomizedSteppers;
+export default RouteProcessSteppers;
 
 const StepConnectorStyles = withStyles({
 	alternativeLabel: {

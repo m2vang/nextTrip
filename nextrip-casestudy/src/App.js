@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
-import CustomizedSteppers from './components/routeStepper/ProcessStepper';
+import RouteProcessSteppers from './components/routeStepper/RouteProcessStepper';
 // material-ui
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -51,8 +51,7 @@ class App extends Component {
                     <ThemeProvider theme={theme}>
                         <Grid item xs={12}>
                             <Header/>
-                            <Typography variant="h4" style={styles.title}>Minneapolis Metro Transit Bus
-                                Line</Typography>
+                            <Typography variant="h4" style={styles.title}>Minneapolis Metro Transit Bus Line</Typography>
                             <Typography variant="h5" style={styles.title}>Real Time Departures</Typography>
                             <Box style={this.getbtnContainerStyling()}>
                                 <Button variant="contained" color="primary" style={styles.button}
@@ -64,7 +63,7 @@ class App extends Component {
                                     By Stop Number
                                 </Button>
                             </Box>
-                            {this.state.inRoute ? <CustomizedSteppers restart={this.handleRestart}/> : <div/>}
+                            {this.state.inRoute ? <RouteProcessSteppers restart={this.handleRestart}/> : <div/>}
                         </Grid>
                     </ThemeProvider>
                 </Grid>
@@ -81,10 +80,10 @@ const styles = {
     button: {
         fontWeight: 'bolder',
         marginRight: theme.spacing(1),
-        marginBottom: theme.spacing(4),
+        marginBottom: theme.spacing(1),
     },
     title: {
-        marginBottom: theme.spacing(3),
+        marginBottom: theme.spacing(1),
     }
 };
 

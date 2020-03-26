@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { storeBusRoute, storeRouteData } from '../redux/actions/index';
 import fetchData from '../Fetch';
 import RoutesContainer from "./RoutesContainer";
+import Typography from "@material-ui/core/Typography";
 
 class BusRoute extends Component {
     componentDidMount() {
@@ -27,7 +28,7 @@ class BusRoute extends Component {
     render() {
         return (
             <div>
-                <h1>Transit Routes</h1>
+                <Typography variant="h5">Transit Routes</Typography>
                 <RoutesContainer/>
             </div>
         )
