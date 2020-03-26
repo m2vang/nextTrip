@@ -22,7 +22,7 @@ class RoutesContainer extends Component {
 				<TableContainer style={styles.container}>
 					<Table stickyHeader>
 					<TableHead>
-						<TableRow hover>
+						<TableRow>
 							{this.props.routeTitles.map((item, index) => (
 								<TableCell key={index} style={styles.tableHead}>
 									{item}
@@ -33,7 +33,7 @@ class RoutesContainer extends Component {
 					<TableBody>
 						{this.props.routeData.map((route, index) => {
 							return (
-								<TableRow key={index} hover>
+								<TableRow key={index} hover style={styles.tableRow} onClick={this.props.handleRouteSelection}>
 									<TableCell style={styles.routeRow}>
 										{route.Route}
 									</TableCell>
@@ -84,11 +84,11 @@ const styles = {
 	tableHead: {
 		fontWeight: 'bolder'
 	},
+	tableRow: {
+		cursor: 'pointer'
+	},
 	routeRow: {
 		paddingRight: '45px',
-		hover: {
-			backgroundColor: '#f5f5f5',
-		}
 	},
 };
 const mapStateToProps = ({bRoute}) => {

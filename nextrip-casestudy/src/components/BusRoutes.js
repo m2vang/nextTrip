@@ -20,16 +20,16 @@ class BusRoute extends Component {
         }
     }
 
-    click = () => {
+    handleRouteSelection = () => {
         console.log('in click');
-        this.props.storeBusRoute(9);
+        // this.props.storeBusRoute(9);
     };
 
     render() {
         return (
             <div>
                 <Typography variant="h5">Transit Routes</Typography>
-                <RoutesContainer/>
+                <RoutesContainer handleRouteSelection={this.handleRouteSelection}/>
             </div>
         )
     }
