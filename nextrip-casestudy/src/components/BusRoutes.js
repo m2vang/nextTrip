@@ -4,8 +4,18 @@ import { storeBusRoute, storeRouteData } from '../redux/actions/index';
 import fetchData from '../Fetch';
 import RoutesContainer from "./RoutesContainer";
 import Typography from "@material-ui/core/Typography";
+import DirectionsContainer from "./DirectionsContainer";
 
 class BusRoute extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            busIcon: true,
+            directionIcon: false,
+            stopIcon: false
+        }
+    }
+
     componentDidMount() {
         this.getBusRoutes();
     }
@@ -23,13 +33,16 @@ class BusRoute extends Component {
     handleRouteSelection = (routeChosen) => {
         console.log('in click', routeChosen);
         this.props.storeBusRoute(routeChosen);
+        this.setState({busIcon: false, directionIcon: true, stopIcon: false});
+        this.props.handleNext();
     };
 
     render() {
         return (
             <div>
                 <Typography variant="h5">Transit Routes</Typography>
-                <RoutesContainer handleRouteSelection={this.handleRouteSelection}/>
+                {this.state.busIcon ? <RoutesContainer handleRouteSelection={this.handleRouteSelection}/> : null}
+                {this.state.directionIcon ? <DirectionsContainer/> : null}
             </div>
         )
     }

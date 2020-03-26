@@ -62,7 +62,7 @@ const RouteProcessSteppers = ({restart}) => {
 					</Step>
 				))}
 			</Stepper>
-			<BusRoutes/>
+			<BusRoutes handleNext={handleNext}/>
 			<div>
 				{activeStep === steps.length ? (
 					<div>
@@ -82,14 +82,6 @@ const RouteProcessSteppers = ({restart}) => {
 									<ArrowBackIosIcon/>
 									Back
 								</Button>}
-							<Button
-								variant="contained"
-								color="primary"
-								onClick={handleNext}
-								className={classes.button}>
-								{activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-								<ArrowForwardIosIcon/>
-							</Button>
 						</div>
 					</div>
 				)}
