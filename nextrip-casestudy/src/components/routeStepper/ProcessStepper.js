@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux'
 import clsx from 'clsx';
+import BusRoutes from '../BusRoutes';
 // material-ui
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -61,6 +62,7 @@ const CustomizedSteppers = ({restart}) => {
 					</Step>
 				))}
 			</Stepper>
+			<BusRoutes/>
 			<div>
 				{activeStep === steps.length ? (
 					<div>

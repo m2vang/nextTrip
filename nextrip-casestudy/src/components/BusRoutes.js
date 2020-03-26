@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { storeBusRoute } from '../redux/actions/index';
+import { storeBusRoute, storeRouteData } from '../redux/actions/index';
 import fetchData from '../Fetch';
+import RoutesContainer from "./RoutesContainer";
 
 class BusRoute extends Component {
     componentDidMount() {
@@ -9,10 +10,9 @@ class BusRoute extends Component {
     }
 
     getBusRoutes() {
-        console.log('In Bus routes!');
         try {
             fetchData('Routes').then((result) => {
-                console.log('RESULTS: ', result);
+                this.props.storeRouteData(JSON.parse(result));
             })
         } catch (e) {
             console.log('ERROR IN GETBUSROUTES: ', e);
@@ -27,8 +27,8 @@ class BusRoute extends Component {
     render() {
         return (
             <div>
-                <h1>Bus Routes</h1>
-                <button onClick={this.click}>Click</button>
+                <h1>Transit Routes</h1>
+                <RoutesContainer/>
             </div>
         )
     }
@@ -37,5 +37,5 @@ class BusRoute extends Component {
 const mapStateToProps = ({bRoute}) => {
     const { busRoute } = bRoute;
     return { busRoute };
-}
-export default connect(mapStateToProps, { storeBusRoute })(BusRoute);
+};
+export default connect(mapStateToProps, { storeBusRoute, storeRouteData })(BusRoute);

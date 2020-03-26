@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import CustomizedSteppers from './components/routeStepper/ProcessStepper';
-import BusRoutes from './components/BusRoutes';
 // material-ui
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -66,7 +65,6 @@ class App extends Component {
                                 </Button>
                             </Box>
                             {this.state.inRoute ? <CustomizedSteppers restart={this.handleRestart}/> : <div/>}
-                            <BusRoutes/>
                         </Grid>
                     </ThemeProvider>
                 </Grid>
