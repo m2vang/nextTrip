@@ -3,5 +3,8 @@ export const INIT_STATE = {
 	steps: ['Select Route', 'Select Direction', 'Select Stop'],
 	routeTitles: ['Route', 'Description'],
 	routeData: null,
-	directionsArr: []
+	directionsArr: [],
+	selectedDirection: '',
+	stopsArr: [],
+	selectedStop: ''
 };

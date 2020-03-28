@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux";
-import withStyles from "@material-ui/core/styles/withStyles";
-import fetchData from "../Fetch";
-import { storeDirectionData } from "../redux/actions";
-import Grid from "@material-ui/core/Grid";
-import TableContainer from "@material-ui/core/TableContainer";
-import Table from "@material-ui/core/Table";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import {connect} from 'react-redux';
+import withStyles from '@material-ui/core/styles/withStyles';
+import fetchData from '../Fetch';
+import { storeDirectionData } from '../redux/actions';
+import Grid from '@material-ui/core/Grid';
+import TableContainer from '@material-ui/core/TableContainer';
+import Table from '@material-ui/core/Table';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import TableBody from '@material-ui/core/TableBody';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class DirectionsContainer extends Component {
 	componentDidMount() {
@@ -18,8 +18,6 @@ class DirectionsContainer extends Component {
 
 	getDirections() {
 		try {
-			console.log('FETCH URL: ', this.props.busRoute);
-
 			fetchData(`Directions/${this.props.busRoute}`).then((result) => {
 				console.log('RESPONSE: ', JSON.parse(result));
 				this.props.storeDirectionData(JSON.parse(result));
@@ -88,9 +86,9 @@ const styles = {
 		paddingRight: '45px',
 	}
 };
-const mapStateToProps = ({bRoute, dRoute}) => {
-	const { busRoute } = bRoute;
-	const { directionsArr } = dRoute;
+const mapStateToProps = ({bReducer, dReducer}) => {
+	const { busRoute } = bReducer;
+	const { directionsArr } = dReducer;
 	return { busRoute, directionsArr };
 };
 export default connect(mapStateToProps, { storeDirectionData })(withStyles(styles)(DirectionsContainer));

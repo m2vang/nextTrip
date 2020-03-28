@@ -4,42 +4,46 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import fetchData from '../Fetch';
+import { storeStopsData } from '../redux/actions';
 
-class RoutesContainer extends Component {
+class StopsContainer extends Component {
+	componentDidMount() {
+		this.getStops();
+	}
+
+	getStops() {
+		try {
+			fetchData(`Stops/${this.props.busRoute}/${this.props.selectedDirection}`).then((result) => {
+				console.log('RESPONSE: ', JSON.parse(result));
+				this.props.storeStopsData(JSON.parse(result));
+			})
+		} catch (e) {
+			console.log('ERROR IN getDirections: ', e);
+		}
+	}
+
 	render() {
 		let content;
-		if (this.props.routeTitles && this.props.routeData) {
+		if (this.props.stopsArr) {
 			content = (
 				<TableContainer style={styles.container}>
 					<Table stickyHeader>
-					<TableHead>
-						<TableRow>
-							{this.props.routeTitles.map((item, index) => (
-								<TableCell key={index} style={styles.tableHead}>
-									{item}
-								</TableCell>
-							))}
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{this.props.routeData.map((route, index) => {
-							return (
-								<TableRow key={index} hover style={styles.tableRow} onClick={() => this.props.handleRouteSelection(route)}>
-									<TableCell style={styles.routeRow}>
-										{route.Route}
-									</TableCell>
-									<TableCell>
-										{route.Description}
-									</TableCell>
-								</TableRow>
-							)
-						})}
-					</TableBody>
+						<TableBody>
+							{this.props.stopsArr.map((stops, index) => {
+								return (
+									<TableRow key={index} hover style={styles.tableRow} onClick={() => this.props.handleStopsSelection(stops)}>
+										<TableCell style={styles.routeRow}>
+											{stops.Text}
+										</TableCell>
+									</TableRow>
+								)
+							})}
+						</TableBody>
 					</Table>
 				</TableContainer>
 			)
@@ -86,8 +90,10 @@ const styles = {
 		paddingRight: '45px',
 	}
 };
-const mapStateToProps = ({bReducer}) => {
-	const { routeData, routeTitles } = bReducer;
-	return { routeData, routeTitles };
+const mapStateToProps = ({sReducer, dReducer, bReducer}) => {
+	const { busRoute } = bReducer;
+	const { stopsArr, selectedStop } = sReducer;
+	const { selectedDirection } = dReducer;
+	return { stopsArr, selectedStop, selectedDirection, busRoute };
 };
-export default connect(mapStateToProps, {})(withStyles(styles)(RoutesContainer));
+export default connect(mapStateToProps, { storeStopsData })(withStyles(styles)(StopsContainer));
