@@ -50,7 +50,6 @@ class RoutesContainer extends Component {
 		} else {
 			content = <CircularProgress/>;
 		}
-
 		return (
 			<div style={window.innerWidth > 768 ? styles.root : styles.rootMobile}>
 				<Grid container spacing={3}>
@@ -89,7 +88,7 @@ const styles = {
 	},
 	routeRow: {
 		paddingRight: '45px',
-	},
+	}
 };
 const mapStateToProps = ({bRoute}) => {
 	const { routeData, routeTitles } = bRoute;
