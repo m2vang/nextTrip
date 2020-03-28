@@ -6,5 +6,7 @@ export const INIT_STATE = {
 	directionsArr: [],
 	selectedDirection: '',
 	stopsArr: [],
-	selectedStop: ''
+	selectedStop: '',
+	departuresTitle: ['Route', 'Description', 'Departure Time'],
+	departures: []
 };

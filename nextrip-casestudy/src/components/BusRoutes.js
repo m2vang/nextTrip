@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { storeBusRoute, storeRouteData, storeSelectedDirection } from '../redux/actions/index';
+import { storeBusRoute, storeRouteData, storeSelectedDirection, storeSelectedStop } from '../redux/actions/index';
 import fetchData from '../Fetch';
 import RoutesContainer from './RoutesContainer';
 import DirectionsContainer from './DirectionsContainer';
 import StopsContainer from './StopsContainer';
 import Typography from '@material-ui/core/Typography';
+import DeparturesContainer from './DeparturesContainer';
 
 class BusRoute extends Component {
     constructor(props) {
@@ -46,7 +47,7 @@ class BusRoute extends Component {
     };
 
     handleStopsSelection = (stopChosen) => {
-        this.props.storeSelectedDirection(stopChosen);
+        this.props.storeSelectedStop(stopChosen);
         this.setState({busIcon: false, directionIcon: false, stopIcon: false, title: 'Departures'});
         this.props.handleNext();
     };
@@ -54,14 +55,18 @@ class BusRoute extends Component {
     render() {
         return (
             <div>
-                <Typography variant="h5">{this.state.title}</Typography>
+                <Typography variant="h5">{this.props.selectedStop ? this.props.selectedStop.Text : ''}<span> </span>{this.state.title}</Typography>
                 {this.state.busIcon ? <RoutesContainer handleRouteSelection={this.handleRouteSelection} activeStep={this.props.activeStep}/> : null}
                 {this.state.directionIcon ? <DirectionsContainer handleDirectionSelection={this.handleDirectionSelection} activeStep={this.props.activeStep}/> : null}
                 {this.state.stopIcon ? <StopsContainer handleStopsSelection={this.handleStopsSelection} activeStep={this.props.activeStep}/> : null}
+                {!this.state.busIcon && !this.state.directionIcon && !this.state.stopIcon ? <DeparturesContainer /> : null}
             </div>
         )
     }
 
 }
-const mapStateToProps = () => {};
-export default connect(mapStateToProps, { storeBusRoute, storeRouteData, storeSelectedDirection })(BusRoute);
+const mapStateToProps = ({sReducer}) => {
+    const { selectedStop } = sReducer;
+    return { selectedStop }
+};
+export default connect(mapStateToProps, { storeBusRoute, storeRouteData, storeSelectedDirection, storeSelectedStop })(BusRoute);
