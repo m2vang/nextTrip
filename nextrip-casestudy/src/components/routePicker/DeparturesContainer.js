@@ -18,11 +18,9 @@ class DeparturesContainer extends Component {
 	}
 
 	getDepartures() {
-		let routeNumber = this.props.busRoute[Object.keys(this.props.busRoute)[Object.keys(this.props.busRoute).length-1]];
-		let stopValue = this.props.selectedStop[Object.keys(this.props.selectedStop)[Object.keys(this.props.selectedStop).length-1]];
-		let directionNumber = this.props.selectedDirection[Object.keys(this.props.selectedDirection)[Object.keys(this.props.selectedDirection).length-1]];
+		let redux = this.props;
 		try {
-			fetchData(`${routeNumber}/${directionNumber}/${stopValue}`).then((result) => {
+			fetchData(`${redux.routeNumber}/${redux.directionNumber}/${redux.stopNumber}`).then((result) => {
 				console.log('DEPARTURES: ', JSON.parse(result));
 				this.props.storeDeparturesData(JSON.parse(result));
 			})
@@ -100,10 +98,10 @@ const styles = {
 	}
 };
 const mapStateToProps = ({ bReducer, dReducer, sReducer, departReducer }) => {
-	const { busRoute } = bReducer;
-	const { selectedDirection } = dReducer;
-	const { selectedStop } = sReducer;
+	const { busRoute, routeNumber } = bReducer;
+	const { selectedDirection, directionNumber } = dReducer;
+	const { selectedStop, stopNumber } = sReducer;
 	const { departures, departuresTitle } = departReducer;
-	return { selectedStop, busRoute, selectedDirection, departures, departuresTitle };
+	return { selectedStop, busRoute, routeNumber, selectedDirection, directionNumber, departures, departuresTitle, stopNumber };
 };
 export default connect(mapStateToProps, { storeDirectionData, storeDeparturesData })(withStyles(styles)(DeparturesContainer));
