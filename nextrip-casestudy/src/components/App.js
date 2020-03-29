@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import { clearBusRouteData, clearDeparturesData, clearStopsData, clearDirectionData } from '../redux/actions';
 import Header from './Header';
 import RouteProcessSteppers from './routePicker/RouteProcessStepper';
 // material-ui
@@ -35,6 +37,10 @@ class App extends Component {
 
     handleRestart = () => {
         this.setState({inRoute: false, inStop: false, chosen: false, boxAlignment: 'inline-flex'});
+        this.props.clearBusRouteData();
+        this.props.clearDirectionData();
+        this.props.clearStopsData();
+        this.props.clearDeparturesData();
     };
 
     getBtnContainerStyling = () => {
@@ -85,5 +91,5 @@ const styles = {
         marginBottom: theme.spacing(1),
     }
 };
-
-export default withStyles(styles)(App);
+const mapStateToProps = () => {};
+export default connect(mapStateToProps, { clearBusRouteData, clearDirectionData, clearStopsData, clearDeparturesData })(withStyles(styles)(App));
