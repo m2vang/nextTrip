@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { storeBusRoute, storeRouteData, storeSelectedDirection, storeSelectedStop } from '../redux/actions/index';
+import { storeBusRoute, storeRouteData, storeSelectedDirection, storeSelectedStop } from '../../redux/actions';
 import fetchData from '../Fetch';
 import RoutesContainer from './RoutesContainer';
 import DirectionsContainer from './DirectionsContainer';

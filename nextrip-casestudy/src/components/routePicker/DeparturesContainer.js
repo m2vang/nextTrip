@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import fetchData from '../Fetch';
-import { storeDirectionData, storeDeparturesData } from '../redux/actions';
+import { storeDirectionData, storeDeparturesData } from '../../redux/actions';
 import Grid from '@material-ui/core/Grid';
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
@@ -48,7 +48,7 @@ class DeparturesContainer extends Component {
 						<TableBody>
 							{this.props.departures.map((departure, index) => {
 								return (
-									<TableRow key={index} hover style={styles.tableRow} >
+									<TableRow key={index} hover>
 										<TableCell style={styles.dirRow} align={'center'}>
 											{departure.Route}
 										</TableCell>
@@ -94,9 +94,6 @@ const styles = {
 	},
 	container: {
 		maxHeight: 440,
-	},
-	tableRow: {
-		cursor: 'pointer'
 	},
 	dirRow: {
 		paddingRight: '45px',

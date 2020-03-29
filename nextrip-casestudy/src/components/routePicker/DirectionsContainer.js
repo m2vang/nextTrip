@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import fetchData from '../Fetch';
-import { storeDirectionData } from '../redux/actions';
+import { storeDirectionData } from '../../redux/actions';
 import Grid from '@material-ui/core/Grid';
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';

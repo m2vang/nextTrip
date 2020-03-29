@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from './components/Header';
-import RouteProcessSteppers from './components/routeStepper/RouteProcessStepper';
+import Header from './Header';
+import RouteProcessSteppers from './routePicker/RouteProcessStepper';
 // material-ui
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -25,11 +25,11 @@ class App extends Component {
         };
     }
 
-    handleRouteSelection = () => {
+    inRouteSelection = () => {
         this.setState({inRoute: true, inStop: false, chosen: true, boxAlignment: ''});
     };
 
-    handleStopSelection = () => {
+    inStopSelection = () => {
         this.setState({inRoute: false, inStop: true, chosen: true, boxAlignment: ''});
     };
 
@@ -54,10 +54,10 @@ class App extends Component {
                             <Typography variant="h4" style={styles.title}>Minneapolis Metro Transit Bus Line</Typography>
                             <Typography variant="h5" style={styles.title}>Find Real Time Departures By: </Typography>
                             <Box style={this.getBtnContainerStyling()}>
-                                <Button variant="contained" color={this.state.inRoute ? "primary" : "default"} style={styles.button} onClick={this.handleRouteSelection}>
+                                <Button variant="contained" color={this.state.inRoute ? "primary" : "default"} style={styles.button} onClick={this.inRouteSelection}>
                                     Route
                                 </Button>
-                                <Button variant="contained" color={this.state.inStop ? "primary" : "default"} style={styles.button} onClick={this.handleStopSelection}>
+                                <Button variant="contained" color={this.state.inStop ? "primary" : "default"} style={styles.button} onClick={this.inStopSelection}>
                                     Stop Number
                                 </Button>
                             </Box>
