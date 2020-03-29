@@ -32,10 +32,10 @@ NextTrip API documentation: https://svc.metrotransit.org/nextrip/help
 ## Tasks
 -[x] Create React App
 -[x] Add Redux 
--[ ] API Calls (GET)
-    -[ ] Get all routes => /Routes
-    -[ ] Get all directions => /Directions/Routes
-    -[ ] Get all stops => /Routes/Directions
+-[x] API Calls (GET)
+    -[x] Get all routes => /Routes
+    -[x] Get all directions => /Directions/Routes
+    -[x] Get all stops => /Routes/Directions
 -[ ] Handle browser back & forth arrow functionality
 -[ ] Test code
 -[ ] README.md file must include:
