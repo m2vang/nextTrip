@@ -5,8 +5,6 @@ import Header from './Header';
 import RouteProcessSteppers from './routePicker/RouteProcessStepper';
 // material-ui
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import { Box } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 // material-ui/styles
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
@@ -20,34 +18,21 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            inRoute: false,
-            inStop: false,
-            chosen: false,
-            boxAlignment: 'inline-flex'
+            inRoute: true,
         };
     }
 
-    inRouteSelection = () => {
-        this.setState({inRoute: true, inStop: false, chosen: true, boxAlignment: ''});
+    //restart() resets inRoute state back to false first before switching it to true to restart the process
+    restart = () => {
+        this.setState({inRoute: false }, () => this.handleRestartRoute());
     };
 
-    inStopSelection = () => {
-        this.setState({inRoute: false, inStop: true, chosen: true, boxAlignment: ''});
-    };
-
-    handleRestart = () => {
-        this.setState({inRoute: false, inStop: false, chosen: false, boxAlignment: 'inline-flex'});
+    handleRestartRoute = () => {
+        this.setState({inRoute: true });
         this.props.clearBusRouteData();
         this.props.clearDirectionData();
         this.props.clearStopsData();
         this.props.clearDeparturesData();
-    };
-
-    getBtnContainerStyling = () => {
-        return ({
-            display: this.state.boxAlignment,
-            flexDirection: 'column'
-        })
     };
 
     render() {
@@ -59,15 +44,7 @@ class App extends Component {
                             <Header/>
                             <Typography variant="h4" style={styles.title}>Minneapolis Metro Transit Bus Line</Typography>
                             <Typography variant="h5" style={styles.title}>Find Real Time Departures By: </Typography>
-                            <Box style={this.getBtnContainerStyling()}>
-                                <Button variant="contained" color={this.state.inRoute ? "primary" : "default"} style={styles.button} onClick={this.inRouteSelection}>
-                                    Route
-                                </Button>
-                                <Button variant="contained" color={this.state.inStop ? "primary" : "default"} style={styles.button} onClick={this.inStopSelection}>
-                                    Stop Number
-                                </Button>
-                            </Box>
-                            {this.state.inRoute ? <RouteProcessSteppers restart={this.handleRestart}/> : <div/>}
+                            {this.state.inRoute ? <RouteProcessSteppers restart={this.restart}/> : null}
                         </Grid>
                     </ThemeProvider>
                 </Grid>
@@ -80,11 +57,6 @@ const styles = {
     app: {
         textAlign: 'center',
         height: '100vh',
-    },
-    button: {
-        fontWeight: 'bolder',
-        marginRight: theme.spacing(1),
-        marginBottom: theme.spacing(1),
     },
     title: {
         fontSize: '22px',

@@ -13,7 +13,7 @@ export default (state = INIT_STATE, action) => {
         case STORE_BUS_ROUTE:
             return { ...state, busRoute: action.route, routeNumber: action.route[Object.keys(action.route)[Object.keys(action.route).length-1]] };
         case CLEAR_BUS_ROUTE_DATA:
-            return { ...state, busRoute: '', routeData: '', routeNumber: '' };
+            return { ...state, busRoute: '', routeNumber: '' };
         case STORE_ROUTE_DATA:
             return { ...state, routeData: action.data };
         default:

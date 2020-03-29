@@ -35,7 +35,7 @@ function stepIcons(props) {
 	);
 }
 
-const RouteProcessSteppers = ({restart}) => {
+const RouteProcessSteppers = ({ restart }) => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = React.useState(0);
 	const {steps} = useSelector(state => ({steps: state.bReducer.steps}));
