@@ -37,7 +37,7 @@ class App extends Component {
         this.setState({inRoute: false, inStop: false, chosen: false, boxAlignment: 'inline-flex'});
     };
 
-    getbtnContainerStyling = () => {
+    getBtnContainerStyling = () => {
         return ({
             display: this.state.boxAlignment,
             flexDirection: 'column'
@@ -52,14 +52,12 @@ class App extends Component {
                         <Grid item xs={12}>
                             <Header/>
                             <Typography variant="h4" style={styles.title}>Minneapolis Metro Transit Bus Line</Typography>
-                            <Typography variant="h5" style={styles.title}>Real Time Departures By: </Typography>
-                            <Box style={this.getbtnContainerStyling()}>
-                                <Button variant="contained" color={this.state.inRoute ? "primary" : "default"} style={styles.button}
-                                        onClick={this.handleRouteSelection}>
+                            <Typography variant="h5" style={styles.title}>Find Real Time Departures By: </Typography>
+                            <Box style={this.getBtnContainerStyling()}>
+                                <Button variant="contained" color={this.state.inRoute ? "primary" : "default"} style={styles.button} onClick={this.handleRouteSelection}>
                                     Route
                                 </Button>
-                                <Button variant="contained" color={this.state.inStop ? "primary" : "default"} style={styles.button}
-                                        onClick={this.handleStopSelection}>
+                                <Button variant="contained" color={this.state.inStop ? "primary" : "default"} style={styles.button} onClick={this.handleStopSelection}>
                                     Stop Number
                                 </Button>
                             </Box>
@@ -83,6 +81,7 @@ const styles = {
         marginBottom: theme.spacing(1),
     },
     title: {
+        fontSize: '22px',
         marginBottom: theme.spacing(1),
     }
 };

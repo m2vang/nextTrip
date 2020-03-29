@@ -18,12 +18,12 @@ class DeparturesContainer extends Component {
 	}
 
 	getDepartures() {
-		console.log('URL: ', this.props.busRoute, this.props.selectedDirection, this.props.selectedStop);
+		let routeNumber = this.props.busRoute[Object.keys(this.props.busRoute)[Object.keys(this.props.busRoute).length-1]];
+		let stopValue = this.props.selectedStop[Object.keys(this.props.selectedStop)[Object.keys(this.props.selectedStop).length-1]];
+		let directionNumber = this.props.selectedDirection[Object.keys(this.props.selectedDirection)[Object.keys(this.props.selectedDirection).length-1]];
 		try {
-			let stopValue = this.props.selectedStop[Object.keys(this.props.selectedStop)[Object.keys(this.props.selectedStop).length-1]];
-
-			fetchData(`${this.props.busRoute}/${this.props.selectedDirection}/${stopValue}`).then((result) => {
-				console.log('RESPONSE: ', result);
+			fetchData(`${routeNumber}/${directionNumber}/${stopValue}`).then((result) => {
+				console.log('DEPARTURES: ', JSON.parse(result));
 				this.props.storeDeparturesData(JSON.parse(result));
 			})
 		} catch (e) {
@@ -42,8 +42,7 @@ class DeparturesContainer extends Component {
 								{this.props.departuresTitle.map((name, index) => (
 									<TableCell key={index} style={styles.tableHead} align={'center'}>
 										{name}
-									</TableCell>
-								))}
+									</TableCell>))}
 							</TableRow>
 						</TableHead>
 						<TableBody>
@@ -59,9 +58,7 @@ class DeparturesContainer extends Component {
 										<TableCell style={styles.dirRow} align={'center'}>
 											{departure.DepartureText}
 										</TableCell>
-									</TableRow>
-								)
-							})}
+									</TableRow>)})}
 						</TableBody>
 					</Table>
 				</TableContainer>
@@ -89,8 +86,8 @@ const styles = {
 		marginBottom: '15px'
 	},
 	rootMobile: {
-		width: '60%',
-		marginLeft: '20%',
+		width: '99%',
+		marginLeft: '1%',
 		border: '1px solid',
 		borderRadius: '5px',
 		marginBottom: '15px'

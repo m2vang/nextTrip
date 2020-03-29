@@ -17,9 +17,10 @@ class DirectionsContainer extends Component {
 	}
 
 	getDirections() {
+		let routeNumber = this.props.busRoute[Object.keys(this.props.busRoute)[Object.keys(this.props.busRoute).length-1]];
 		try {
-			fetchData(`Directions/${this.props.busRoute}`).then((result) => {
-				console.log('RESPONSE: ', JSON.parse(result));
+			fetchData(`Directions/${routeNumber}`).then((result) => {
+				console.log('DIRECTIONS: ', JSON.parse(result));
 				this.props.storeDirectionData(JSON.parse(result));
 			})
 		} catch (e) {
@@ -36,13 +37,11 @@ class DirectionsContainer extends Component {
 						<TableBody>
 							{this.props.directionsArr.map((dir, index) => {
 								return (
-									<TableRow key={index} hover style={styles.tableRow} onClick={() => this.props.handleDirectionSelection(dir.Value)}>
+									<TableRow key={index} hover style={styles.tableRow} onClick={() => this.props.handleDirectionSelection(dir)}>
 										<TableCell style={styles.dirRow} align={'center'}>
 											{dir.Text}
 										</TableCell>
-									</TableRow>
-								)
-							})}
+									</TableRow>)})}
 						</TableBody>
 					</Table>
 				</TableContainer>

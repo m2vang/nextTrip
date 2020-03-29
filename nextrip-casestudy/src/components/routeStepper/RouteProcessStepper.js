@@ -66,7 +66,7 @@ const RouteProcessSteppers = ({restart}) => {
 			<div>
 				{activeStep === steps.length ? (
 					<div>
-						<Typography className={classes.instructions}>
+						<Typography className={classes.text}>
 							Have a safe trip!
 						</Typography>
 						<Button variant="contained" color="primary" onClick={handleReset} className={classes.button}>
@@ -137,7 +137,8 @@ const useStyles = makeStyles(theme => ({
 		fontWeight: 'bolder',
 		marginRight: theme.spacing(1),
 	},
-	instructions: {
+	text: {
+		fontSize: '22px',
 		marginTop: theme.spacing(1),
 		marginBottom: theme.spacing(1),
 	},

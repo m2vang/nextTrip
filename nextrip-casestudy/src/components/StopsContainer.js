@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import withStyles from '@material-ui/core/styles/withStyles';
+import fetchData from '../Fetch';
+import { storeStopsData } from '../redux/actions';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
-import withStyles from '@material-ui/core/styles/withStyles';
 import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import fetchData from '../Fetch';
-import { storeStopsData } from '../redux/actions';
 
 class StopsContainer extends Component {
 	componentDidMount() {
@@ -17,13 +17,14 @@ class StopsContainer extends Component {
 	}
 
 	getStops() {
+		let routeNumber = this.props.busRoute[Object.keys(this.props.busRoute)[Object.keys(this.props.busRoute).length-1]];
+		let directionNumber = this.props.selectedDirection[Object.keys(this.props.selectedDirection)[Object.keys(this.props.selectedDirection).length-1]];
 		try {
-			fetchData(`Stops/${this.props.busRoute}/${this.props.selectedDirection}`).then((result) => {
-				console.log('RESPONSE: ', JSON.parse(result));
+			fetchData(`Stops/${routeNumber}/${directionNumber}`).then((result) => {
 				this.props.storeStopsData(JSON.parse(result));
 			})
 		} catch (e) {
-			console.log('ERROR IN getDirections: ', e);
+			console.log('ERROR IN getStops: ', e);
 		}
 	}
 
@@ -40,9 +41,7 @@ class StopsContainer extends Component {
 										<TableCell style={styles.routeRow}>
 											{stops.Text}
 										</TableCell>
-									</TableRow>
-								)
-							})}
+									</TableRow>)})}
 						</TableBody>
 					</Table>
 				</TableContainer>
