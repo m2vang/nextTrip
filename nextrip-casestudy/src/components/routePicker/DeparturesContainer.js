@@ -9,8 +9,8 @@ import Table from '@material-ui/core/Table';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import TableHead from "@material-ui/core/TableHead";
+import Typography from "@material-ui/core/Typography";
 
 class DeparturesContainer extends Component {
 	componentDidMount() {
@@ -62,7 +62,12 @@ class DeparturesContainer extends Component {
 				</TableContainer>
 			)
 		} else {
-			content = <CircularProgress/>;
+			content = (
+				<div>
+					<Typography variant="h5" color="error" paragraph={true}>No More Departures At This Time</Typography>
+					<Typography variant="h5" color="error" paragraph={true}>Please Try Again Later</Typography>
+				</div>
+			);
 		}
 		return (
 			<div style={window.innerWidth > 768 ? styles.root : styles.rootMobile}>
