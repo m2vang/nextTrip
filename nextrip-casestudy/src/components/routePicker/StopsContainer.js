@@ -14,7 +14,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 class StopsContainer extends Component {
 	componentDidMount() {
 		this.getStops();
-	}
+	};
 
 	getStops() {
 		let routeNumber = this.props.busRoute[Object.keys(this.props.busRoute)[Object.keys(this.props.busRoute).length-1]];
@@ -26,7 +26,12 @@ class StopsContainer extends Component {
 		} catch (e) {
 			console.log('ERROR IN getStops: ', e);
 		}
-	}
+	};
+
+	handleStopsClick = (stop) => {
+		this.props.handleStopsSelection(stop);
+		this.props.handleNext();
+	};
 
 	render() {
 		let content;
@@ -37,7 +42,7 @@ class StopsContainer extends Component {
 						<TableBody>
 							{this.props.stopsArr.map((stops, index) => {
 								return (
-									<TableRow key={index} hover style={styles.tableRow} onClick={() => this.props.handleStopsSelection(stops)}>
+									<TableRow key={index} hover style={styles.tableRow} onClick={() => this.handleStopsClick(stops)}>
 										<TableCell style={styles.routeRow}>
 											{stops.Text}
 										</TableCell>

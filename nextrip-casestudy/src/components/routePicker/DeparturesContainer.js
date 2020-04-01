@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import fetchData from '../Fetch';
 import { storeDirectionData, storeDeparturesData } from '../../redux/actions';
@@ -15,7 +15,7 @@ import Typography from "@material-ui/core/Typography";
 class DeparturesContainer extends Component {
 	componentDidMount() {
 		this.getDepartures();
-	}
+	};
 
 	getDepartures() {
 		let redux = this.props;
@@ -27,7 +27,7 @@ class DeparturesContainer extends Component {
 		} catch (e) {
 			console.log('ERROR IN getDepartures: ', e);
 		}
-	}
+	};
 
 	render() {
 		let content;
@@ -80,6 +80,7 @@ class DeparturesContainer extends Component {
 		)
 	}
 }
+
 const styles = {
 	root: {
 		width: '60%',

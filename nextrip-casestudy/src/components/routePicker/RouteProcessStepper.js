@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux'
 import clsx from 'clsx';
@@ -35,9 +35,9 @@ function stepIcons(props) {
 	);
 }
 
-const RouteProcessSteppers = ({ restart }) => {
+const RouteProcessSteppers = ({ handleBackClick, restart, handleRouteSelection, handleDirectionSelection, handleStopsSelection, busIcon, directionIcon, stopIcon }) => {
 	const classes = useStyles();
-	const [activeStep, setActiveStep] = React.useState(0);
+	const [activeStep, setActiveStep] = useState(0);
 	const {steps} = useSelector(state => ({steps: state.bReducer.steps}));
 
 	const handleNext = () => {
@@ -46,6 +46,7 @@ const RouteProcessSteppers = ({ restart }) => {
 
 	const handleBack = () => {
 		setActiveStep(prevActiveStep => prevActiveStep - 1);
+		handleBackClick();
 	};
 
 	const handleReset = () => {
@@ -62,23 +63,33 @@ const RouteProcessSteppers = ({ restart }) => {
 					</Step>
 				))}
 			</Stepper>
-			<BusRoutes handleNext={handleNext} activestep={activeStep}/>
+			<BusRoutes handleNext={handleNext}
+			           handleRouteSelection={handleRouteSelection}
+			           handleDirectionSelection={handleDirectionSelection}
+			           handleStopsSelection={handleStopsSelection}
+			           busIcon={busIcon}
+			           directionIcon={directionIcon}
+			           stopIcon={stopIcon}
+			           activeStep={activeStep}/>
 			<div>
 				{activeStep === steps.length ? (
 					<div>
-						<Typography className={classes.text}>
-							Have a safe trip!
-						</Typography>
+						<Typography className={classes.text}>Have a safe trip!</Typography>
 						<Button variant="contained" color="primary" onClick={handleReset} className={classes.button}>
 							Restart
 							<RefreshIcon/>
 						</Button>
 					</div>
-				) : null}
+				) : <div>
+					{activeStep === 0 ? null :
+						<Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+							Back
+						</Button>}
+				</div>}
 			</div>
 		</div>
 	);
-};
+}
 
 export default RouteProcessSteppers;
 

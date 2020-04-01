@@ -11,6 +11,10 @@ import Grid from '@material-ui/core/Grid';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 class RoutesContainer extends Component {
+	handleRouteClick = (route) => {
+		this.props.handleRouteSelection(route);
+		this.props.handleNext();
+	};
 	render() {
 		let content;
 		if (this.props.routeTitles && this.props.routeData) {
@@ -29,7 +33,7 @@ class RoutesContainer extends Component {
 					<TableBody>
 						{this.props.routeData.map((route, index) => {
 							return (
-								<TableRow key={index} hover style={styles.tableRow} onClick={() => this.props.handleRouteSelection(route)}>
+								<TableRow key={index} hover style={styles.tableRow} onClick={() => this.handleRouteClick(route)}>
 									<TableCell style={styles.routeRow}>
 										{route.Route}
 									</TableCell>

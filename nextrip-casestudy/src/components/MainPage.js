@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { clearBusRouteData, clearDeparturesData, clearStopsData, clearDirectionData } from '../redux/actions';
+import { storeBusRoute,
+	storeRouteData,
+	storeSelectedDirection,
+	storeSelectedStop,
+	clearBusRouteData,
+	clearDirectionData,
+	clearStopsData,
+	clearDeparturesData
+} from '../redux/actions';
 import Header from './Header';
 import RouteProcessSteppers from './routePicker/RouteProcessStepper';
 // material-ui
@@ -19,16 +27,39 @@ class MainPage extends Component {
 		super(props);
 		this.state = {
 			inRoute: true,
+			busIcon: true,
+			directionIcon: false,
+			stopIcon: false,
+			activeStep: 0,
 		};
 	}
 
+	handleBackClick = () => {
+		this.setState({activeStep: this.state.activeStep - 1});
+	};
+
+	handleRouteSelection = (routeChosen) => {
+		this.props.storeBusRoute(routeChosen);
+		this.setState({busIcon: false, directionIcon: true, stopIcon: false, activeStep: 1});
+	};
+
+	handleDirectionSelection = (directionChosen) => {
+		this.props.storeSelectedDirection(directionChosen);
+		this.setState({busIcon: false, directionIcon: false, stopIcon: true, activeStep: 2});
+	};
+
+	handleStopsSelection = (stopChosen) => {
+		this.props.storeSelectedStop(stopChosen);
+		this.setState({busIcon: false, directionIcon: false, stopIcon: false, activeStep: 3});
+	};
+
 	//restart() resets inRoute state back to false first before switching it to true to restart the process
 	restart = () => {
-		this.setState({inRoute: false }, () => this.handleRestartRoute());
+		this.setState({inRoute: false, setActiveStep: 0}, () => this.handleRestartRoute());
 	};
 
 	handleRestartRoute = () => {
-		this.setState({inRoute: true });
+		this.setState({inRoute: true, busIcon: true, directionIcon: false, stopIcon: false});
 		this.props.clearBusRouteData();
 		this.props.clearDirectionData();
 		this.props.clearStopsData();
@@ -44,7 +75,17 @@ class MainPage extends Component {
 								<Header/>
 								<Typography variant="h4" style={styles.title}>Minneapolis Metro Transit Bus Line</Typography>
 								<Typography variant="h5" style={styles.title}>Find Real Time Departures By: </Typography>
-								{this.state.inRoute ? <RouteProcessSteppers restart={this.restart}/> : null}
+								{this.state.inRoute ?
+									<RouteProcessSteppers
+										restart={this.restart}
+										handleBackClick={this.handleBackClick}
+										handleRouteSelection={this.handleRouteSelection}
+										handleDirectionSelection={this.handleDirectionSelection}
+										handleStopsSelection={this.handleStopsSelection}
+										busIcon={this.state.busIcon}
+										directionIcon={this.state.directionIcon}
+										stopIcon={this.state.stopIcon}
+									/> : null}
 							</Grid>
 						</ThemeProvider>
 					</Grid>
@@ -63,5 +104,10 @@ const styles = {
 		marginBottom: theme.spacing(1),
 	}
 };
-const mapStateToProps = () => {};
-export default connect(mapStateToProps, { clearBusRouteData, clearDirectionData, clearStopsData, clearDeparturesData })(withStyles(styles)(MainPage));
+const mapStateToProps = ({ bReducer, dReducer, sReducer}) => {
+	const { busRoute } = bReducer;
+	const { selectedDirection } = dReducer;
+	const { selectedStop } = sReducer;
+	return { busRoute, selectedDirection, selectedStop };
+};
+export default connect(mapStateToProps, { storeBusRoute, storeRouteData, storeSelectedDirection, storeSelectedStop, clearBusRouteData, clearDirectionData, clearStopsData, clearDeparturesData })(withStyles(styles)(MainPage));

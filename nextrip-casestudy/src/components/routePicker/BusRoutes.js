@@ -12,17 +12,11 @@ import Typography from '@material-ui/core/Typography';
 class BusRoute extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            busIcon: true,
-            directionIcon: false,
-            stopIcon: false,
-            titleEnding: 'Transit Routes'
-        }
-    }
+    };
 
     componentDidMount() {
         this.getBusRoutes();
-    }
+    };
 
     getBusRoutes() {
         try {
@@ -32,47 +26,44 @@ class BusRoute extends Component {
         } catch (e) {
             console.log('ERROR IN getBusRoutes: ', e);
         }
-    }
-
-    handleRouteSelection = (routeChosen) => {
-        this.props.storeBusRoute(routeChosen);
-        this.setState({busIcon: false, directionIcon: true, stopIcon: false, titleEnding: 'Transit Directions'});
-        this.props.handleNext();
-    };
-
-    handleDirectionSelection = (directionChosen) => {
-        this.props.storeSelectedDirection(directionChosen);
-        this.setState({busIcon: false, directionIcon: false, stopIcon: true, titleEnding: 'Transit Stops'});
-        this.props.handleNext();
-    };
-
-    handleStopsSelection = (stopChosen) => {
-        this.props.storeSelectedStop(stopChosen);
-        this.setState({busIcon: false, directionIcon: false, stopIcon: false, titleEnding: 'Departures'});
-        this.props.handleNext();
     };
 
     render() {
+        // beg of title logic
         let title;
-        if (!this.state.busIcon && this.state.directionIcon && !this.state.stopIcon && this.props.busRoute) {
+        if (!this.props.busIcon && this.props.directionIcon && !this.props.stopIcon && this.props.busRoute) {
             title = this.props.busRoute.Description;
-        } else if (!this.state.busIcon && !this.state.directionIcon && this.state.stopIcon && this.props.selectedDirection) {
+        } else if (!this.props.busIcon && !this.props.directionIcon && this.props.stopIcon && this.props.selectedDirection) {
             title = this.props.busRoute.Description + ' ' + this.props.selectedDirection.Text;
-        } else if (!this.state.busIcon && !this.state.directionIcon && !this.state.stopIcon && this.props.selectedStop) {
+        } else if (!this.props.busIcon && !this.props.directionIcon && !this.props.stopIcon && this.props.selectedStop) {
             title = this.props.busRoute.Description + ' ' + this.props.selectedDirection.Text + ' ' + this.props.selectedStop.Text;
         }
+
+        // ending of title logic
+        let endingTitle;
+        if (this.props.activeStep === 0) {
+            endingTitle = 'Transit Routes';
+        } else if (this.props.activeStep === 1) {
+            endingTitle = 'Transit Directions';
+        } else if (this.props.activeStep === 2) {
+            endingTitle = 'Transit Stops';
+        } else if (this.props.activeStep === 3) {
+            endingTitle = 'Departures';
+        }
+
         return (
             <div>
-                <Typography variant="h5" style={window.innerWidth > 768 ? styles.title : styles.titleMobile}>{title}<span> </span>{this.state.titleEnding}</Typography>
-                {this.state.busIcon ? <RoutesContainer handleRouteSelection={this.handleRouteSelection} activeStep={this.props.activeStep}/> : null}
-                {this.state.directionIcon ? <DirectionsContainer handleDirectionSelection={this.handleDirectionSelection} activeStep={this.props.activeStep}/> : null}
-                {this.state.stopIcon ? <StopsContainer handleStopsSelection={this.handleStopsSelection} activeStep={this.props.activeStep}/> : null}
-                {!this.state.busIcon && !this.state.directionIcon && !this.state.stopIcon ? <DeparturesContainer /> : null}
+                <Typography variant="h5" style={window.innerWidth > 768 ? styles.title : styles.titleMobile}>{title}<span> </span>{endingTitle}</Typography>
+                {this.props.activeStep === 0 ? <RoutesContainer handleRouteSelection={this.props.handleRouteSelection} handleNext={this.props.handleNext}/> : null}
+                {this.props.activeStep === 1 ? <DirectionsContainer handleDirectionSelection={this.props.handleDirectionSelection} handleNext={this.props.handleNext}/> : null}
+                {this.props.activeStep === 2 ? <StopsContainer handleStopsSelection={this.props.handleStopsSelection} handleNext={this.props.handleNext}/> : null}
+                {this.props.activeStep === 3 ? <DeparturesContainer /> : null}
             </div>
         )
     }
 
 }
+
 const styles = {
     title: {
         marginBottom: '1%'

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import withStyles from '@material-ui/core/styles/withStyles';
 import fetchData from '../Fetch';
 import { storeDirectionData } from '../../redux/actions';
@@ -14,7 +14,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 class DirectionsContainer extends Component {
 	componentDidMount() {
 		this.getDirections();
-	}
+	};
 
 	getDirections() {
 		let routeNumber = this.props.busRoute[Object.keys(this.props.busRoute)[Object.keys(this.props.busRoute).length-1]];
@@ -26,7 +26,12 @@ class DirectionsContainer extends Component {
 		} catch (e) {
 			console.log('ERROR IN getDirections: ', e);
 		}
-	}
+	};
+
+	handleDirectionsClick = (direction) => {
+		this.props.handleDirectionSelection(direction);
+		this.props.handleNext();
+	};
 
 	render() {
 		let content;
@@ -37,7 +42,7 @@ class DirectionsContainer extends Component {
 						<TableBody>
 							{this.props.directionsArr.map((dir, index) => {
 								return (
-									<TableRow key={index} hover style={styles.tableRow} onClick={() => this.props.handleDirectionSelection(dir)}>
+									<TableRow key={index} hover style={styles.tableRow} onClick={() => this.handleDirectionsClick(dir)}>
 										<TableCell style={styles.dirRow} align={'center'}>
 											{dir.Text}
 										</TableCell>
@@ -60,6 +65,7 @@ class DirectionsContainer extends Component {
 		)
 	}
 }
+
 const styles = {
 	root: {
 		width: '45%',
