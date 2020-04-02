@@ -36,6 +36,13 @@ class MainPage extends Component {
 
 	handleBackClick = () => {
 		this.setState({activeStep: this.state.activeStep - 1});
+		if (this.state.activeStep === 1) {
+			this.props.clearBusRouteData();
+		} else if (this.state.activeStep === 2) {
+			this.props.clearDirectionData();
+		} else if (this.state.activeStep === 3) {
+			this.props.clearStopsData();
+		}
 	};
 
 	handleRouteSelection = (routeChosen) => {

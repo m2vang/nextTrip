@@ -10,10 +10,6 @@ import DeparturesContainer from './DeparturesContainer';
 import Typography from '@material-ui/core/Typography';
 
 class BusRoute extends Component {
-    constructor(props) {
-        super(props);
-    };
-
     componentDidMount() {
         this.getBusRoutes();
     };
@@ -29,15 +25,9 @@ class BusRoute extends Component {
     };
 
     render() {
-        // beg of title logic
-        let title;
-        if (!this.props.busIcon && this.props.directionIcon && !this.props.stopIcon && this.props.busRoute) {
-            title = this.props.busRoute.Description;
-        } else if (!this.props.busIcon && !this.props.directionIcon && this.props.stopIcon && this.props.selectedDirection) {
-            title = this.props.busRoute.Description + ' ' + this.props.selectedDirection.Text;
-        } else if (!this.props.busIcon && !this.props.directionIcon && !this.props.stopIcon && this.props.selectedStop) {
-            title = this.props.busRoute.Description + ' ' + this.props.selectedDirection.Text + ' ' + this.props.selectedStop.Text;
-        }
+        let title = `${this.props.busRoute.Description ? this.props.busRoute.Description : ''} 
+        ${this.props.selectedDirection.Text ? this.props.selectedDirection.Text : ''}
+        ${this.props.selectedStop.Text ? this.props.selectedStop.Text : ''}`;
 
         // ending of title logic
         let endingTitle;

@@ -12,7 +12,6 @@ import StepConnector from '@material-ui/core/StepConnector';
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
 // material-ui icons
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import DirectionsBusIcon from '@material-ui/icons/DirectionsBus';
@@ -82,7 +81,8 @@ const RouteProcessSteppers = ({ handleBackClick, restart, handleRouteSelection, 
 					</div>
 				) : <div>
 					{activeStep === 0 ? null :
-						<Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+						<Button variant="contained" color="primary" disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+							<ArrowBackIosIcon/>
 							Back
 						</Button>}
 				</div>}
