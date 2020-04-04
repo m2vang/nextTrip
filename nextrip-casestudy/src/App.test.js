@@ -1,9 +1,17 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { shallow } from 'enzyme';
 import App from './components/App';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+describe('<App />', () => {
+  it('renders a <Router /> component', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find(Router)).to.have.lengthOf(1);
+  });
+
+  it('renders a <Route /> component', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find(Route)).to.have.lengthOf(2);
+  });
 });

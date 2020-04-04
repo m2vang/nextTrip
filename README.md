@@ -36,7 +36,7 @@ NextTrip API documentation: https://svc.metrotransit.org/nextrip/help
     -[x] Get all routes => /Routes
     -[x] Get all directions => /Directions/Routes
     -[x] Get all stops => /Routes/Directions
--[ ] Handle browser back & forth arrow functionality
+-[x] Handle browser back & forth arrow functionality
 -[ ] Test code
 -[ ] README.md file must include:
     -[ ] Steps to build and run app
