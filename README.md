@@ -29,24 +29,19 @@ bus line depending on which route, direction or stop the user selects.
 * The application should be ADA compliant
 * The application should be mobile friendly
 
-## Possible Future Features
-* Implement the search by "Stops" API
-* Implement UI for when a departure is arriving soon (flashing bus icon?)
-* Implement a better UI for displaying data instead of a table format
-* Create testing files for every component to test via Enzyme & Jest
+## Completed
+- [x] Create React App
+- [x] Add Redux 
+- [x] API Calls (GET)
+    - [x] Get all routes
+    - [x] Get all directions 
+    - [x] Get all stops 
+- [x] Handle browser back & forth arrow functionality
+- [x] Test code
+- [x] Update README.md file
 
-## Tasks
-[x] Create React App
-[x] Add Redux 
-[x] API Calls (GET)
-    [x] Get all routes
-    [x] Get all directions 
-    [x] Get all stops 
-[x] Handle browser back & forth arrow functionality
-[x] Test code
-[x] README.md file must include:
-    [x] Steps to build and run app
-    [x] Steps to execute test
-    [x] List of assumptions during development
-[x] Submit application via remote access to repo
-
+## Next Steps
+- [ ] Implement the search by "Stops" API
+- [ ] Implement UI for when a departure is arriving soon (flashing bus icon?)
+- [ ] Implement a better UI for displaying data instead of a table format
+- [ ] Create testing files for every component to test via Enzyme & Jest
