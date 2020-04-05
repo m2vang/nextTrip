@@ -36,17 +36,17 @@ bus line depending on which route, direction or stop the user selects.
 * Create testing files for every component to test via Enzyme & Jest
 
 ## Tasks
--[x] Create React App
--[x] Add Redux 
--[x] API Calls (GET)
-    -[x] Get all routes
-    -[x] Get all directions 
-    -[x] Get all stops 
--[x] Handle browser back & forth arrow functionality
--[x] Test code
--[x] README.md file must include:
-    -[x] Steps to build and run app
-    -[x] Steps to execute test
-    -[x] List of assumptions during development
--[x] Submit application via remote access to repo
+[x] Create React App
+[x] Add Redux 
+[x] API Calls (GET)
+    [x] Get all routes
+    [x] Get all directions 
+    [x] Get all stops 
+[x] Handle browser back & forth arrow functionality
+[x] Test code
+[x] README.md file must include:
+    [x] Steps to build and run app
+    [x] Steps to execute test
+    [x] List of assumptions during development
+[x] Submit application via remote access to repo
 
