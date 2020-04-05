@@ -75,28 +75,29 @@ class MainPage extends Component {
 
 	render() {
 		return (
-				<div style={styles.app}>
-					<Grid container spacing={3}>
-						<ThemeProvider theme={theme}>
-							<Grid item xs={12}>
-								<Header/>
-								<Typography variant="h4" style={styles.title}>Minneapolis Metro Transit Bus Line</Typography>
-								<Typography variant="h5" style={styles.title}>Find Real Time Departures By: </Typography>
-								{this.state.inRoute ?
-									<RouteProcessSteppers
-										restart={this.restart}
-										handleBackClick={this.handleBackClick}
-										handleRouteSelection={this.handleRouteSelection}
-										handleDirectionSelection={this.handleDirectionSelection}
-										handleStopsSelection={this.handleStopsSelection}
-										busIcon={this.state.busIcon}
-										directionIcon={this.state.directionIcon}
-										stopIcon={this.state.stopIcon}
-									/> : null}
-							</Grid>
-						</ThemeProvider>
-					</Grid>
-				</div>
+			<div style={styles.app}>
+				<Grid container spacing={3}>
+					<ThemeProvider theme={theme}>
+						<Grid item xs={12}>
+							<Header/>
+							<Typography variant="h4" style={styles.title}>Minneapolis Metro Transit Bus
+								Line</Typography>
+							<Typography variant="h5" style={styles.title}>Find Real Time Departures By: </Typography>
+							{this.state.inRoute ?
+								<RouteProcessSteppers
+									restart={this.restart}
+									handleBackClick={this.handleBackClick}
+									handleRouteSelection={this.handleRouteSelection}
+									handleDirectionSelection={this.handleDirectionSelection}
+									handleStopsSelection={this.handleStopsSelection}
+									busIcon={this.state.busIcon}
+									directionIcon={this.state.directionIcon}
+									stopIcon={this.state.stopIcon}
+								/> : null}
+						</Grid>
+					</ThemeProvider>
+				</Grid>
+			</div>
 		);
 	}
 }

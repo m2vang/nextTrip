@@ -46,6 +46,7 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "react-test-renderer": "^16.13.1",
     "react-testing-library": "^8.0.1",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "sinon": "^9.0.1"
   }
 }
